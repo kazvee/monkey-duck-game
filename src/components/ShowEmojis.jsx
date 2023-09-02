@@ -5,6 +5,7 @@ import addDucks from '../helpers/addDucks';
 
 const ShowEmojis = ({ emojis }) => {
   const [displayedEmojis, setDisplayedEmojis] = useState([]);
+  const [ducksAdded, setDucksAdded] = useState(false);
 
   useEffect(() => {
     const shuffledEmojis = shuffleArray([...emojis]);
@@ -12,14 +13,17 @@ const ShowEmojis = ({ emojis }) => {
   }, [emojis]);
 
   const handleAddDucks = () => {
-    const finalEmojis = addDucks(displayedEmojis, ducks);
-    const emojiStrings = finalEmojis.map((item) => {
-      if (typeof item === 'object' && item.emoji) {
-        return item.emoji;
-      }
-      return item;
-    });
-    setDisplayedEmojis(emojiStrings);
+    if (!ducksAdded) {
+      const finalEmojis = addDucks(displayedEmojis, ducks);
+      const emojiStrings = finalEmojis.map((item) => {
+        if (typeof item === 'object' && item.emoji) {
+          return item.emoji;
+        }
+        return item;
+      });
+      setDisplayedEmojis(emojiStrings);
+      setDucksAdded(true);
+    }
   };
 
   return (
