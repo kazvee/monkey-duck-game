@@ -53,14 +53,21 @@ const ShowEmojis = ({ emojis }) => {
         }
       }
 
-      if (maxStreak === 5) {
-        console.log('Congratulations! You got 5 ducks in a row! 🎉');
-      } else if (maxStreak === 4) {
-        console.log('Congratulations! You got 4 ducks in a row! 🎉');
-      } else if (maxStreak === 3) {
-        console.log('Congratulations! You got 3 ducks in a row! 🎉');
-      } else if (maxStreak === 2) {
-        console.log('Congratulations! You got 2 ducks in a row! 🎉');
+      switch (maxStreak) {
+        case 5:
+          console.log('Congratulations! You got 5 ducks in a row! 🎉');
+          break;
+        case 4:
+          console.log('Congratulations! You got 4 ducks in a row! 🎉');
+          break;
+        case 3:
+          console.log('Congratulations! You got 3 ducks in a row! 🎉');
+          break;
+        case 2:
+          console.log('Congratulations! You got 2 ducks in a row! 🎉');
+          break;
+        default:
+          break;
       }
     }
   };
