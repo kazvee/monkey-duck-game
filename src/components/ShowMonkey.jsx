@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import addMonkey from '../helpers/addMonkey';
 
-const ShowMonkey = () => {
+const ShowMonkey = ({ onMonkeyShuffle }) => {
   const [displayedMonkey, setDisplayedMonkey] = useState(null);
 
   const handleGetRandomMonkey = () => {
@@ -9,17 +9,29 @@ const ShowMonkey = () => {
     setDisplayedMonkey(randomMonkey);
   };
 
+  const handleMonkeyShuffle = () => {
+    if (displayedMonkey) {
+      onMonkeyShuffle();
+    }
+  };
+
   return (
-    <div>
-      <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
-      {displayedMonkey && (
+    <p>
+      {displayedMonkey ? (
         <div>
-          <p>This is {displayedMonkey.name}! {displayedMonkey.emoji}</p>
+          <p>
+            This is {displayedMonkey.name}! {displayedMonkey.emoji}
+          </p>
           <p>Favorite Food: {displayedMonkey.favoriteFood}</p>
           <p>Species: {displayedMonkey.species}</p>
+          <button onClick={handleMonkeyShuffle}>
+            Ask {displayedMonkey.name} to Shuffle the Emojis
+          </button>
         </div>
+      ) : (
+        <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
       )}
-    </div>
+    </p>
   );
 };
 
