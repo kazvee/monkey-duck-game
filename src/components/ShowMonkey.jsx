@@ -16,7 +16,7 @@ const ShowMonkey = ({ onMonkeyShuffle }) => {
   };
 
   return (
-    <p>
+    <div>
       {displayedMonkey ? (
         <div>
           <p>
@@ -29,9 +29,11 @@ const ShowMonkey = ({ onMonkeyShuffle }) => {
           </button>
         </div>
       ) : (
-        <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
+        <p>
+          <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
+        </p>
       )}
-    </p>
+    </div>
   );
 };
 

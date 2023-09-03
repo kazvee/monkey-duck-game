@@ -36,6 +36,18 @@ const ShowEmojis = ({ emojis }) => {
     if (ducksAdded) {
       const shuffledEmojis = shuffleArray([...displayedEmojis]);
       setDisplayedEmojis(shuffledEmojis);
+
+      let hasWin = false;
+      for (let i = 0; i < shuffledEmojis.length - 1; i++) {
+        if (shuffledEmojis[i] === '🦆' && shuffledEmojis[i + 1] === '🦆') {
+          hasWin = true;
+          break;
+        }
+      }
+
+      if (hasWin) {
+        console.log('Congratulations! You got 2 ducks in a row! 🎉');
+      }
     }
   };
 
