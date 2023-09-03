@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import shuffleArray from '../helpers/shuffleArray';
 import ducks from '../data/ducks';
 import addDucks from '../helpers/addDucks';
+import ShowMonkey from './ShowMonkey';
+import addMonkey from '../helpers/addMonkey';
 
 const ShowEmojis = ({ emojis }) => {
   const [displayedEmojis, setDisplayedEmojis] = useState([]);
   const [ducksAdded, setDucksAdded] = useState(false);
+  const [displayedMonkey, setDisplayedMonkey] = useState(null);
 
   useEffect(() => {
     const shuffledEmojis = shuffleArray([...emojis]);
@@ -23,19 +26,39 @@ const ShowEmojis = ({ emojis }) => {
       });
       setDisplayedEmojis(emojiStrings);
       setDucksAdded(true);
+
+      const monkey = addMonkey();
+      setDisplayedMonkey(monkey);
+    }
+  };
+
+  const handleMonkeyShuffle = () => {
+    if (ducksAdded) {
+      const shuffledEmojis = shuffleArray([...displayedEmojis]);
+      setDisplayedEmojis(shuffledEmojis);
     }
   };
 
   return (
     <div>
       <h1>Emojis</h1>
-      <div className="emoji-container">
+
+      <div className='emoji-container'>
         {displayedEmojis.map((emoji, index) => (
-          <span key={index} className="emoji">
+          <span key={index} className='emoji'>
             {emoji}
           </span>
         ))}
       </div>
+
+      {ducksAdded && displayedMonkey && (
+        <div className='monkey-info'>
+          <ShowMonkey
+            displayedMonkey={displayedMonkey}
+            onMonkeyShuffle={handleMonkeyShuffle}
+          />
+        </div>
+      )}
 
       <p>
         {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
