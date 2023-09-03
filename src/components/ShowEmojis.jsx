@@ -37,15 +37,29 @@ const ShowEmojis = ({ emojis }) => {
       const shuffledEmojis = shuffleArray([...displayedEmojis]);
       setDisplayedEmojis(shuffledEmojis);
 
-      let hasWin = false;
-      for (let i = 0; i < shuffledEmojis.length - 1; i++) {
-        if (shuffledEmojis[i] === '🦆' && shuffledEmojis[i + 1] === '🦆') {
-          hasWin = true;
-          break;
+      let currentStreak = 0;
+      let maxStreak = 0;
+
+      for (let i = 0; i < shuffledEmojis.length; i++) {
+        if (shuffledEmojis[i] === '🦆') {
+          currentStreak++;
+          if (currentStreak >= 5) {
+            maxStreak = 5;
+          } else if (currentStreak > maxStreak) {
+            maxStreak = currentStreak;
+          }
+        } else {
+          currentStreak = 0;
         }
       }
 
-      if (hasWin) {
+      if (maxStreak === 5) {
+        console.log('Congratulations! You got 5 ducks in a row! 🎉');
+      } else if (maxStreak === 4) {
+        console.log('Congratulations! You got 4 ducks in a row! 🎉');
+      } else if (maxStreak === 3) {
+        console.log('Congratulations! You got 3 ducks in a row! 🎉');
+      } else if (maxStreak === 2) {
         console.log('Congratulations! You got 2 ducks in a row! 🎉');
       }
     }
