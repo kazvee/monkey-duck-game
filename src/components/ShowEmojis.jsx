@@ -9,6 +9,7 @@ const ShowEmojis = ({ emojis }) => {
   const [displayedEmojis, setDisplayedEmojis] = useState([]);
   const [ducksAdded, setDucksAdded] = useState(false);
   const [displayedMonkey, setDisplayedMonkey] = useState(null);
+  const [winMessage, setWinMessage] = useState('');
 
   useEffect(() => {
     const shuffledEmojis = shuffleArray([...emojis]);
@@ -55,18 +56,19 @@ const ShowEmojis = ({ emojis }) => {
 
       switch (maxStreak) {
         case 5:
-          console.log('Congratulations! You got 5 ducks in a row! 🎉');
+          setWinMessage('You win! You got 5 ducks in a row! 🎉');
           break;
         case 4:
-          console.log('Congratulations! You got 4 ducks in a row! 🎉');
+          setWinMessage('You win! You got 4 ducks in a row! 🎉');
           break;
         case 3:
-          console.log('Congratulations! You got 3 ducks in a row! 🎉');
+          setWinMessage('You win! You got 3 ducks in a row! 🎉');
           break;
         case 2:
-          console.log('Congratulations! You got 2 ducks in a row! 🎉');
+          setWinMessage('You win! You got 2 ducks in a row! 🎉');
           break;
         default:
+          setWinMessage('');
           break;
       }
     }
@@ -96,6 +98,10 @@ const ShowEmojis = ({ emojis }) => {
       <p>
         {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
       </p>
+
+      <div>
+        <p>{winMessage}</p>
+      </div>
     </div>
   );
 };
