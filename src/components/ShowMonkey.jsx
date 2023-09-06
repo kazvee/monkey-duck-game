@@ -18,15 +18,25 @@ const ShowMonkey = ({ onMonkeyShuffle }) => {
   return (
     <div>
       {displayedMonkey ? (
-        <div>
+        <div className='monkey-container'>
+          <span className='monkey-emoji'>{displayedMonkey.emoji}</span>
           <p>
-            This is {displayedMonkey.name}! {displayedMonkey.emoji}
+            <span className='strong'>This is {displayedMonkey.name}!</span>
           </p>
-          <p>Favorite Food: {displayedMonkey.favoriteFood}</p>
-          <p>Species: {displayedMonkey.species}</p>
-          <button onClick={handleMonkeyShuffle}>
-            Ask {displayedMonkey.name} to Shuffle the Emojis
-          </button>
+          <div className='monkey-details'>
+            <p>
+              <span className='strong'>Species:</span> {displayedMonkey.species}
+            </p>
+            <p>
+              <span className='strong'>Favorite food: </span>
+              {displayedMonkey.favoriteFood}
+            </p>
+          </div>
+          <div>
+            <button onClick={handleMonkeyShuffle}>
+              Ask {displayedMonkey.name} to Shuffle the Emojis
+            </button>
+          </div>
         </div>
       ) : (
         <p>

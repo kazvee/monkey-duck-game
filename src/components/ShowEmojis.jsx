@@ -76,8 +76,6 @@ const ShowEmojis = ({ emojis }) => {
 
   return (
     <div>
-      <h1>Emojis</h1>
-
       <div className='emoji-container'>
         {displayedEmojis.map((emoji, index) => (
           <span key={index} className='emoji'>
@@ -85,6 +83,10 @@ const ShowEmojis = ({ emojis }) => {
           </span>
         ))}
       </div>
+
+      <p>
+        {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
+      </p>
 
       {ducksAdded && displayedMonkey && (
         <div className='monkey-info'>
@@ -94,11 +96,6 @@ const ShowEmojis = ({ emojis }) => {
           />
         </div>
       )}
-
-      <p>
-        {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
-      </p>
-
       <div>
         <p>{winMessage}</p>
       </div>
