@@ -4,6 +4,7 @@ import ducks from '../data/ducks';
 import addDucks from '../helpers/addDucks';
 import ShowMonkey from './ShowMonkey';
 import addMonkey from '../helpers/addMonkey';
+import ShowGameStats from './ShowGameStats';
 
 const ShowEmojis = ({ emojis }) => {
   const [displayedEmojis, setDisplayedEmojis] = useState([]);
@@ -97,7 +98,7 @@ const ShowEmojis = ({ emojis }) => {
         </div>
       )}
       <div>
-        <p>{winMessage}</p>
+        <ShowGameStats winMessage={winMessage} />
       </div>
     </div>
   );
