@@ -53,16 +53,20 @@ h1 {
   width: calc(5% - 10px); /* Make a 20 x 5 grid and subtract 10px for margin */
 }
 
+.cards-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .monkey-container {
   background-color: #C2E5D3;
   border-radius: 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  flex-direction: row;
+  flex: 1;
   font-family: 'Happy Monkey', cursive;
   font-size: 18px;
-  margin-top: 30px;
-  max-width: calc(30%);
-  padding: 20px;
+  margin: 10px 5px;
+  padding: 30px;
 }
 
 .monkey-emoji {
@@ -75,6 +79,20 @@ h1 {
 
 .monkey-details {
   text-align: left;
+}
+
+.game-stats {
+  background-color: #ffcccc;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #8b008b;
+  flex: 1;
+  font-family: 'Happy Monkey', cursive;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 5px;
+  padding: 30px;
+  text-align: center;
 }
 
 button {

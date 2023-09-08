@@ -39,9 +39,7 @@ const ShowMonkey = ({ onMonkeyShuffle }) => {
           </div>
         </div>
       ) : (
-        <p>
-          <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
-        </p>
+        <button onClick={handleGetRandomMonkey}>Add a Monkey</button>
       )}
     </div>
   );

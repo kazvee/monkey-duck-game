@@ -85,20 +85,27 @@ const ShowEmojis = ({ emojis }) => {
         ))}
       </div>
 
-      <p>
-        {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
-      </p>
+      <div className='cards-container'>
+        <p>
+          {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
+        </p>
+      </div>
 
-      {ducksAdded && displayedMonkey && (
-        <div className='monkey-info'>
-          <ShowMonkey
-            displayedMonkey={displayedMonkey}
-            onMonkeyShuffle={handleMonkeyShuffle}
-          />
-        </div>
-      )}
-      <div>
-        <ShowGameStats winMessage={winMessage} />
+      <div className='cards-container'>
+        {ducksAdded && displayedMonkey && (
+          <div className='monkey-info'>
+            <ShowMonkey
+              displayedMonkey={displayedMonkey}
+              onMonkeyShuffle={handleMonkeyShuffle}
+            />
+          </div>
+        )}
+
+        {displayedMonkey && winMessage && (
+          <div className='game-stats'>
+            <ShowGameStats winMessage={winMessage} />
+          </div>
+        )}
       </div>
     </div>
   );
