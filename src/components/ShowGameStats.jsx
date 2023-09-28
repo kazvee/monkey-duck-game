@@ -1,11 +1,7 @@
 import React from 'react';
 
 const ShowGameStats = ({ winMessage }) => {
-  return (
-    <div>
-      <p>{winMessage}</p>
-    </div>
-  );
+  return <div>{winMessage}</div>;
 };
 
 export default ShowGameStats;

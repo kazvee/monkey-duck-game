@@ -42,7 +42,7 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  max-width: 70vw;
+  width: 80vw;
   padding: 20px;
   text-align: center;
 }
@@ -93,6 +93,20 @@ h1 {
   margin: 10px 5px;
   padding: 30px;
   text-align: center;
+}
+
+.winner-text {
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+}
+
+.game-stats ul {
+  list-style: none;
+}
+
+.game-stats ul li {
+  font-size: 26px;  
+  list-style-type: none;
 }
 
 button {

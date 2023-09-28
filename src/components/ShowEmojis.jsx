@@ -11,22 +11,20 @@ const ShowEmojis = ({ emojis }) => {
   const [ducksAdded, setDucksAdded] = useState(false);
   const [displayedMonkey, setDisplayedMonkey] = useState(null);
   const [winMessage, setWinMessage] = useState('');
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [maxStreak, setMaxStreak] = useState(0);
+  const [ducksInARow, setDucksInARow] = useState([]);
 
   useEffect(() => {
-    const shuffledEmojis = shuffleArray([...emojis]);
+    const emojisCopy = [...emojis];
+    const shuffledEmojis = shuffleArray(emojisCopy);
     setDisplayedEmojis(shuffledEmojis);
   }, [emojis]);
 
   const handleAddDucks = () => {
     if (!ducksAdded) {
       const finalEmojis = addDucks(displayedEmojis, ducks);
-      const emojiStrings = finalEmojis.map((item) => {
-        if (typeof item === 'object' && item.emoji) {
-          return item.emoji;
-        }
-        return item;
-      });
-      setDisplayedEmojis(emojiStrings);
+      setDisplayedEmojis(finalEmojis);
       setDucksAdded(true);
 
       const monkey = addMonkey();
@@ -36,51 +34,92 @@ const ShowEmojis = ({ emojis }) => {
 
   const handleMonkeyShuffle = () => {
     if (ducksAdded) {
-      const shuffledEmojis = shuffleArray([...displayedEmojis]);
-      setDisplayedEmojis(shuffledEmojis);
+      setWinMessage('');
 
-      let currentStreak = 0;
-      let maxStreak = 0;
+      const emojisCopy = [...displayedEmojis];
+      const shuffledEmojis = shuffleArray(emojisCopy);
+
+      setCurrentStreak(0);
+
+      let streak = 0;
+      let newDucksInARow = [];
 
       for (let i = 0; i < shuffledEmojis.length; i++) {
-        if (shuffledEmojis[i] === '🦆') {
-          currentStreak++;
-          if (currentStreak >= 5) {
-            maxStreak = 5;
-          } else if (currentStreak > maxStreak) {
-            maxStreak = currentStreak;
-          }
+        const emojiItem = shuffledEmojis[i];
+        if (emojiItem.favoriteFood) {
+          streak++;
+          newDucksInARow.push({
+            name: emojiItem.name,
+            favoriteFood: emojiItem.favoriteFood,
+          });
         } else {
-          currentStreak = 0;
+          streak = 0;
+          newDucksInARow = [];
+        }
+
+        if (streak >= 2 && streak <= 5) {
+          setMaxStreak(streak);
+
+          if (newDucksInARow.length > 0) {
+            setDucksInARow([...newDucksInARow]);
+
+            const winMessage = (
+              <div>
+                <div className='winner-text'>🎉 WINNER! 🎉</div>
+                You got {streak} ducks in a row:
+                <ul>
+                  {newDucksInARow.map((duck, index) => (
+                    <li key={index}>{duck.name}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+            setWinMessage(winMessage);
+          }
         }
       }
 
-      switch (maxStreak) {
-        case 5:
-          setWinMessage('You win! You got 5 ducks in a row! 🎉');
-          break;
-        case 4:
-          setWinMessage('You win! You got 4 ducks in a row! 🎉');
-          break;
-        case 3:
-          setWinMessage('You win! You got 3 ducks in a row! 🎉');
-          break;
-        case 2:
-          setWinMessage('You win! You got 2 ducks in a row! 🎉');
-          break;
-        default:
-          setWinMessage('');
-          break;
-      }
+      setDisplayedEmojis(shuffledEmojis);
     }
   };
+
+  useEffect(() => {
+    let streak = 0;
+    let newDucksInARow = [];
+
+    for (let i = 0; i < displayedEmojis.length; i++) {
+      const emojiItem = displayedEmojis[i];
+      if (emojiItem.favoriteFood) {
+        streak++;
+        newDucksInARow.push({
+          name: emojiItem.name,
+          favoriteFood: emojiItem.favoriteFood,
+        });
+      } else {
+        streak = 0;
+        newDucksInARow = [];
+      }
+
+      if (streak >= 2 && streak <= 5) {
+        setMaxStreak(streak);
+
+        if (newDucksInARow.length > 0) {
+          setDucksInARow([...newDucksInARow]);
+        }
+      }
+    }
+  }, [displayedEmojis]);
 
   return (
     <div>
       <div className='emoji-container'>
-        {displayedEmojis.map((emoji, index) => (
+        {displayedEmojis.map((item, index) => (
           <span key={index} className='emoji'>
-            {emoji}
+            {typeof item === 'object' ? (
+              <span>{item.emoji}</span>
+            ) : (
+              <span>{item}</span>
+            )}
           </span>
         ))}
       </div>
