@@ -42,9 +42,9 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  width: 80vw;
   padding: 20px;
   text-align: center;
+  width: 80vw;
 }
 
 .emoji {
@@ -62,9 +62,10 @@ h1 {
   background-color: #C2E5D3;
   border-radius: 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #8b008b;
   flex: 1;
   font-family: 'Happy Monkey', cursive;
-  font-size: 18px;
+  font-size: 24px;
   margin: 10px 5px;
   padding: 30px;
 }
@@ -97,7 +98,7 @@ h1 {
 
 .winner-text {
   letter-spacing: 8px;
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .game-stats ul {
@@ -116,7 +117,7 @@ button {
   color: #fff;
   cursor: pointer;
   font-family: 'Happy Monkey', cursive;
-  font-size: 20px;
+  font-size: 24px;
   padding: 10px 15px;
 }
 
@@ -128,8 +129,12 @@ footer {
   background-color: rgba(255, 255, 204, 0.8); /* Adjust the alpha value to control transparency */
   bottom: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  font-size: 16px;
+  color: #8b008b;
+  font-family: 'Happy Monkey', cursive;
+  font-size: 18px;
+  font-weight: bold;
   left: 0;
+  letter-spacing: 2px;
   padding: 10px;
   position: fixed;
   text-align: center;
