@@ -11,7 +11,8 @@ const ShowMonkey = ({ onMonkeyShuffle }) => {
 
   const handleMonkeyShuffle = () => {
     if (displayedMonkey) {
-      onMonkeyShuffle();
+      const { name, emoji, victoryMessages } = displayedMonkey;
+      onMonkeyShuffle({ name, emoji, victoryMessages });
     }
   };
 

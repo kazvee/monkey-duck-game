@@ -101,6 +101,19 @@ h1 {
   margin: 20px;
 }
 
+.monkey-victory-name {
+  color: #c71585;
+  font-size: 22px;  
+  font-weight: lighter;
+}
+
+.monkey-victory-message {
+  color: #c71585;
+  font-size: 22px;  
+  font-style: oblique;
+  font-weight: bold;
+}
+
 .game-stats ul {
   list-style: none;
 }

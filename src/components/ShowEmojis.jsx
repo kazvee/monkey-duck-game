@@ -22,17 +22,21 @@ const ShowEmojis = ({ emojis }) => {
   }, [emojis]);
 
   const handleAddDucks = () => {
-    if (!ducksAdded) {
+    if (!ducksAdded && !displayedMonkey) {
       const finalEmojis = addDucks(displayedEmojis, ducks);
       setDisplayedEmojis(finalEmojis);
       setDucksAdded(true);
-
+      handleAddMonkey();
+    }
+  };
+  const handleAddMonkey = () => {
+    if (!displayedMonkey) {
       const monkey = addMonkey();
       setDisplayedMonkey(monkey);
     }
   };
 
-  const handleMonkeyShuffle = () => {
+  const handleMonkeyShuffle = (monkeyInfo) => {
     if (ducksAdded) {
       setWinMessage('');
 
@@ -63,18 +67,32 @@ const ShowEmojis = ({ emojis }) => {
           if (newDucksInARow.length > 0) {
             setDucksInARow([...newDucksInARow]);
 
-            const winMessage = (
-              <div>
-                <div className='winner-text'>🎉 WINNER! 🎉</div>
-                You got {streak} ducks in a row:
-                <ul>
-                  {newDucksInARow.map((duck, index) => (
-                    <li key={index}>{duck.name}</li>
-                  ))}
-                </ul>
-              </div>
-            );
-            setWinMessage(winMessage);
+            if (displayedMonkey) {
+              const randomIndex = Math.floor(
+                Math.random() * monkeyInfo.victoryMessages.length
+              );
+              const randomVictoryMessage =
+                monkeyInfo.victoryMessages[randomIndex];
+
+              const winMessage = (
+                <div>
+                  <div className='winner-text'>🎉 WINNER! 🎉</div>
+                  You got {streak} ducks in a row:
+                  <ul>
+                    {newDucksInARow.map((duck, index) => (
+                      <li key={index}>{duck.name}</li>
+                    ))}
+                  </ul>
+                  <div className='monkey-victory-name'>
+                    {monkeyInfo.emoji} {monkeyInfo.name} says:{' '}
+                    <span className='monkey-victory-message'>
+                      {randomVictoryMessage}
+                    </span>
+                  </div>
+                </div>
+              );
+              setWinMessage(winMessage);
+            }
           }
         }
       }
