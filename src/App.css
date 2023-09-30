@@ -115,12 +115,15 @@ h1 {
 }
 
 .game-stats ul {
+  display: flex;
+  flex-direction: column;
   list-style: none;
+  padding-left: 400px;
+  text-align: justify;
 }
 
-.game-stats ul li {
-  font-size: 26px;  
-  list-style-type: none;
+.game-stats li {
+  font-size: 26px;
 }
 
 button {
