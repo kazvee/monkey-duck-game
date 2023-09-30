@@ -143,9 +143,11 @@ const ShowEmojis = ({ emojis }) => {
       </div>
 
       <div className='cards-container'>
-        <p>
-          {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
-        </p>
+        <div>
+          <p>
+            {!ducksAdded && <button onClick={handleAddDucks}>Add Ducks</button>}
+          </p>
+        </div>
       </div>
 
       <div className='cards-container'>
