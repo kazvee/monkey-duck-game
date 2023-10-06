@@ -146,13 +146,24 @@ footer {
   bottom: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #8b008b;
+  display: flex;
+  flex-direction: row;
   font-family: 'Happy Monkey', cursive;
   font-size: 18px;
-  font-weight: bold;
+  justify-content: center;
   left: 0;
   letter-spacing: 2px;
   padding: 10px;
   position: fixed;
   text-align: center;
-  width: 100%;
+  width: 100%;  
+}
+
+footer span {
+  font-weight: bold;
+  padding: 0 40px;
+}
+
+footer a {
+  text-decoration: none;
 }
