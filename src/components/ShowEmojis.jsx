@@ -12,7 +12,6 @@ const ShowEmojis = ({ emojis }) => {
   const [displayedMonkey, setDisplayedMonkey] = useState(null);
   const [winMessage, setWinMessage] = useState('');
   const [currentStreak, setCurrentStreak] = useState(0);
-  const [maxStreak, setMaxStreak] = useState(0);
   const [ducksInARow, setDucksInARow] = useState([]);
 
   useEffect(() => {
@@ -43,8 +42,6 @@ const ShowEmojis = ({ emojis }) => {
       const emojisCopy = [...displayedEmojis];
       const shuffledEmojis = shuffleArray(emojisCopy);
 
-      setCurrentStreak(0);
-
       let streak = 0;
       let newDucksInARow = [];
 
@@ -62,8 +59,7 @@ const ShowEmojis = ({ emojis }) => {
         }
 
         if (streak >= 2 && streak <= 5) {
-          setMaxStreak(streak);
-
+          setCurrentStreak((prevStreak) => prevStreak + 1);
           if (newDucksInARow.length > 0) {
             setDucksInARow([...newDucksInARow]);
 
@@ -102,31 +98,31 @@ const ShowEmojis = ({ emojis }) => {
   };
 
   useEffect(() => {
-    let streak = 0;
+    setCurrentStreak(0);
     let newDucksInARow = [];
 
     for (let i = 0; i < displayedEmojis.length; i++) {
       const emojiItem = displayedEmojis[i];
       if (emojiItem.favoriteFood) {
-        streak++;
+        setCurrentStreak((prevStreak) => prevStreak + 1);
         newDucksInARow.push({
           name: emojiItem.name,
           favoriteFood: emojiItem.favoriteFood,
         });
       } else {
-        streak = 0;
+        setCurrentStreak(0);
         newDucksInARow = [];
       }
 
-      if (streak >= 2 && streak <= 5) {
-        setMaxStreak(streak);
+      if (currentStreak >= 2 && currentStreak <= 5) {
+        setCurrentStreak(currentStreak);
 
         if (newDucksInARow.length > 0) {
           setDucksInARow([...newDucksInARow]);
         }
       }
     }
-  }, [displayedEmojis]);
+  }, [displayedEmojis, currentStreak]);
 
   return (
     <div>
