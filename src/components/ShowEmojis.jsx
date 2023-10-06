@@ -11,7 +11,6 @@ const ShowEmojis = ({ emojis }) => {
   const [ducksAdded, setDucksAdded] = useState(false);
   const [displayedMonkey, setDisplayedMonkey] = useState(null);
   const [winMessage, setWinMessage] = useState('');
-  const [currentStreak, setCurrentStreak] = useState(0);
   const [ducksInARow, setDucksInARow] = useState([]);
 
   useEffect(() => {
@@ -59,70 +58,40 @@ const ShowEmojis = ({ emojis }) => {
         }
 
         if (streak >= 2 && streak <= 5) {
-          setCurrentStreak((prevStreak) => prevStreak + 1);
-          if (newDucksInARow.length > 0) {
-            setDucksInARow([...newDucksInARow]);
+          const updatedDucksInARow = [...ducksInARow, ...newDucksInARow];
+          setDucksInARow(updatedDucksInARow);
 
-            if (displayedMonkey) {
-              const randomIndex = Math.floor(
-                Math.random() * monkeyInfo.victoryMessages.length
-              );
-              const randomVictoryMessage =
-                monkeyInfo.victoryMessages[randomIndex];
+          if (displayedMonkey) {
+            const randomIndex = Math.floor(
+              Math.random() * monkeyInfo.victoryMessages.length
+            );
+            const randomVictoryMessage =
+              monkeyInfo.victoryMessages[randomIndex];
 
-              const winMessage = (
-                <div>
-                  <div className='winner-text'>🎉 WINNER! 🎉</div>
-                  You got {streak} ducks in a row:
-                  <ul>
-                    {newDucksInARow.map((duck, index) => (
-                      <li key={index}>{duck.name}</li>
-                    ))}
-                  </ul>
-                  <div className='monkey-victory-name'>
-                    {monkeyInfo.emoji} {monkeyInfo.name} says:{' '}
-                    <span className='monkey-victory-message'>
-                      {randomVictoryMessage}
-                    </span>
-                  </div>
+            const winMessage = (
+              <div>
+                <div className='winner-text'>🎉 WINNER! 🎉</div>
+                You got {streak} ducks in a row:
+                <ul>
+                  {newDucksInARow.map((duck, index) => (
+                    <li key={index}>{duck.name}</li>
+                  ))}
+                </ul>
+                <div className='monkey-victory-name'>
+                  {monkeyInfo.emoji} {monkeyInfo.name} says:{' '}
+                  <span className='monkey-victory-message'>
+                    {randomVictoryMessage}
+                  </span>
                 </div>
-              );
-              setWinMessage(winMessage);
-            }
+              </div>
+            );
+            setWinMessage(winMessage);
           }
         }
       }
-
       setDisplayedEmojis(shuffledEmojis);
     }
   };
-
-  useEffect(() => {
-    setCurrentStreak(0);
-    let newDucksInARow = [];
-
-    for (let i = 0; i < displayedEmojis.length; i++) {
-      const emojiItem = displayedEmojis[i];
-      if (emojiItem.favoriteFood) {
-        setCurrentStreak((prevStreak) => prevStreak + 1);
-        newDucksInARow.push({
-          name: emojiItem.name,
-          favoriteFood: emojiItem.favoriteFood,
-        });
-      } else {
-        setCurrentStreak(0);
-        newDucksInARow = [];
-      }
-
-      if (currentStreak >= 2 && currentStreak <= 5) {
-        setCurrentStreak(currentStreak);
-
-        if (newDucksInARow.length > 0) {
-          setDucksInARow([...newDucksInARow]);
-        }
-      }
-    }
-  }, [displayedEmojis, currentStreak]);
 
   return (
     <div>
