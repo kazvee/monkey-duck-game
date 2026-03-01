@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/monkey-duck-game/static/css/main.def42037.css",
+    "main.js": "/monkey-duck-game/static/js/main.1219cef4.js",
+    "static/media/background.jpg": "/monkey-duck-game/static/media/background.49906afc735c1c67710c.jpg",
+    "index.html": "/monkey-duck-game/index.html",
+    "main.def42037.css.map": "/monkey-duck-game/static/css/main.def42037.css.map",
+    "main.1219cef4.js.map": "/monkey-duck-game/static/js/main.1219cef4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.def42037.css",
+    "static/js/main.1219cef4.js"
+  ]
+}
